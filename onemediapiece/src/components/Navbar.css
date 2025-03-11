@@ -1,0 +1,35 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 20px;
+    font-family: sans-serif;
+    margin-left: auto;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-item {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .separator {
+    width: 1px;
+    height: 20px;
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
