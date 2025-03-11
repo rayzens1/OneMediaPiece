@@ -25,3 +25,18 @@
   transform: translateX(-50%);
   max-height: 40px; /* Ajustez selon vos besoins */
 }
+
+.header-wrapper {
+  position: relative;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-wrapper.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Pour qu'il reste au-dessus du contenu */
+  background-color: #f8f8f8; /* On peut éventuellement modifier la couleur */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}

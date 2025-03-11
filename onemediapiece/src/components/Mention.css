@@ -1,0 +1,31 @@
+.mention-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: center;
+    padding-bottom: 15px;
+  }
+  
+  .mention-wrapper p {
+    margin: 0;
+    padding: 0 30px 0 0;
+  }
+  
+  .mention-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .mention-list ul {
+    padding-left: 12px;
+  }
+  
+  .mention-list ul a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.9rem;
+  }
+  
