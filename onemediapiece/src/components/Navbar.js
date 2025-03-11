@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = () => { // Rendre les catégories dynamique en utilisant une liste
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -9,7 +9,7 @@ const Navbar = () => {
         <a href="#en-continue" className="nav-item">En continue</a>
         <span className="separator"></span>
       </div>
-      <div className="navbar-right">
+      <div className="navbar-right"> 
         <a href="#sport" className="nav-item">Sport</a>
         <a href="#economie" className="nav-item">Economie</a>
         <a href="#societe" className="nav-item">Société</a>

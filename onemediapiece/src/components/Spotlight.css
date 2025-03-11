@@ -1,0 +1,21 @@
+.spotlight {
+    max-width: 40%;
+    margin: 0 auto;
+}
+
+.spotlight-cover {
+    max-width: 100%;
+}
+
+.spotlight-cover-figure {
+    margin: 0;
+}
+
+.spotlight-title {
+    text-align: start;
+    font-size: 1.9rem;
+}
+.spotlight-teaser {
+    text-align: start;
+    font-size: 1.2rem;
+}
