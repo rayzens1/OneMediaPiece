@@ -1,7 +1,21 @@
 import React from 'react';
 import './Navbar.css';
 
-const Navbar = () => { // Rendre les catégories dynamique en utilisant une liste
+const categories = [
+  'Sport',
+  'Economie',
+  'Société',
+  'Culture',
+  'Faits divers',
+  'Etudiant',
+  'Politique',
+  'International'
+];
+
+const Navbar = () => { // Rendre les catégories dynamique en utilisant une liste de catégories
+
+  const totalCategories = categories.length;
+  
   return (
     <nav className="navbar">
       <div className="navbar-left">
@@ -10,14 +24,12 @@ const Navbar = () => { // Rendre les catégories dynamique en utilisant une list
         <span className="separator"></span>
       </div>
       <div className="navbar-right"> 
-        <a href="#sport" className="nav-item">Sport</a>
-        <a href="#economie" className="nav-item">Economie</a>
-        <a href="#societe" className="nav-item">Société</a>
-        <a href="#culture" className="nav-item">Culture</a>
-        <a href="#faits-divers" className="nav-item">Faits divers</a>
-        <a href="#etudiant" className="nav-item">Etudiant</a>
-        <a href="#politique" className="nav-item">Politique</a>
-        <a href="#international" className="nav-item">International</a>
+        {Array.from({ length: totalCategories }).map((_, index) => (
+          <a
+            href={`#${categories[index]}`}
+            className="nav-item"
+          >{categories[index]}</a>
+        ))}
       </div>
     </nav>
   );

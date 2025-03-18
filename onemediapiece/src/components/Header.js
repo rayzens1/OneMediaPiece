@@ -10,6 +10,14 @@ export default function Header() {
         setIsSticky(window.pageYOffset > 0);
     };
 
+    const handleClickLogin = () => {
+        window.location.href = '/login.html';
+    };
+    
+    const handleClickLogo = () => {
+        window.location.href = '/';
+    };
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
@@ -19,8 +27,8 @@ export default function Header() {
         <div className={`header-wrapper ${isSticky ? 'sticky' : ''}`}>
             <header className="header">
                 <button className="btn menu">Menu</button>
-                <img src={logo} alt="Logo" className="logo" />
-                <button className="btn login">Se connecter</button>
+                <img src={logo} alt="Logo" className="logo" onClick={handleClickLogo} />
+                <button className="btn login" onClick={handleClickLogin}>Se connecter</button>
             </header>
             <Navbar />
         </div>

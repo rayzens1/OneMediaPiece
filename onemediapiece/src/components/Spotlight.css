@@ -19,3 +19,7 @@
     text-align: start;
     font-size: 1.2rem;
 }
+.spotlight-url {
+    text-decoration: none;
+    color: black;
+}

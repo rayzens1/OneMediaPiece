@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page de Connexion</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .login-container {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .ask-login-container form,
+    .ask-register-container form,
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .ask-login-container label,
+    .ask-register-container label,
+    .login-container label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .ask-login-container input[type="email"],
+    .ask-register-container input[type="email"],
+    .login-container input[type="email"] {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .ask-login-container input[type="password"],
+    .ask-register-container input[type="password"] {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .ask-login-container input[type="submit"],
+    .ask-register-container input[type="submit"],
+    .login-container input[type="submit"] {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+    }
+    .ask-login-container input[type="submit"]:hover,
+    .ask-register-container input[type="submit"]:hover,
+    .login-container input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .logo {
+        object-fit: cover;
+        max-width: 100%;
+        height: auto;
+        padding-bottom: 20px;
+    }
+    .login-a {
+        max-width: 10%;
+    }
+    .ask-login-container,
+    .ask-register-container {
+        display: none;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .notification {
+      padding: 1em;
+      margin: 1em 0;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .notification.error {
+      background-color: #f8d7da;
+      border-color: #f5c2c7;
+      color: #842029;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+    <a class="login-a" href="/"><img class="logo" src="/assets/logo.png"></a>
+    <div class="login-container">
+        <form id='email-form' action="#" method="POST">
+        <label for="email">Adresse Email</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+        <input type="submit" value="Se connecter">
+        </form>
+    </div>
+    <div class="ask-login-container">
+        <div id="errorNotification" class="notification error" style="display:none;">
+          <p id="errorMessage"></p>
+        </div>
+        <form id='login-form' action="#" method="POST">
+            <label for="email">Adresse Email</label>
+            <input type="email" id="email-login" name="email" placeholder="Entrez votre email" required>
+            <label for="password">Mot de Passe</label>
+            <input type="password" id="password-login" name="password" placeholder="Entrez votre mot de passe" required>
+        <input type="submit" value="Se connecter">
+        </form>
+    </div>
+    <div class="ask-register-container">
+        <form id='register-form' action="#" method="POST">
+            <label for="username">Nom d'Utilisateur</label>
+            <input type="text" id="username-register" name="username" placeholder="Entrez votre nom d'utilisateur" required>
+            <label for="email">Adresse Email</label>
+            <input type="email" id="email-register" name="email" placeholder="Entrez votre email" required>
+            <label for="password">Mot de Passe</label>
+            <input type="password" id="password-register" name="password-register" placeholder="Entrez votre mot de passe" required>
+        <input type="submit" value="S'enregistrer">
+        </form>
+    </div>
+</body>
+<script>
+    document.getElementById('email-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Empêche la soumission classique du formulaire
+
+        const email = document.getElementById('email').value;
+
+        const formData = new FormData();
+        formData.append('email', email);
+
+        console.log("formdatae",formData)
+
+      // Envoie les données vers le script PHP "submit.php"
+        fetch('submit-email.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.exists) {
+                // ASK LOGIN MAIL+PASS
+                document.getElementById('email-register').value = email;
+                document.querySelector('.ask-login-container').style.display = 'block';
+                document.querySelector('.login-container').style.display = 'none';
+            } else {
+                // ASK REGISTER
+                document.getElementById('email-register').value = email;
+                document.querySelector('.ask-register-container').style.display = 'block';
+                document.querySelector('.login-container').style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Empêche la soumission classique du formulaire
+
+        const email = document.getElementById('email-register').value;
+        const password = document.getElementById('password-register').value;
+        const username = document.getElementById('username-register').value;
+
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('username', username);
+
+      // Envoie les données vers le script PHP "submit.php"
+        fetch('register.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(JSON.stringify(data))
+            if(data.code==200) {
+                console.log(data.message);
+                document.querySelector('.ask-login-container').style.display = 'block';
+                document.querySelector('.login-container').style.display = 'none';
+                document.querySelector('.ask-register-container').style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Empêche la soumission classique du formulaire
+
+        const email = document.getElementById('email-login').value;
+        const password = document.getElementById('password-login').value;
+
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('password', password);
+
+      // Envoie les données vers le script PHP "submit.php"
+        fetch('login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(JSON.stringify(data))
+            if(data.code==200) {
+                console.log(data.message);
+                window.location.href = "dashboard.php";
+            } else {
+              const errorNotification = document.getElementById('errorNotification');
+              const errorMessage = document.getElementById('errorMessage');
+              errorMessage.textContent = "Votre mot de passe ou adresse email n'est pas valide.";
+              errorNotification.style.display = "block";
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
+    });
+</script>
+</html>

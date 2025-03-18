@@ -8,11 +8,13 @@ const articleTeaser = `En faisant appel de sa condamnation, l’ex-animateur ris
 const Spotlight = () => {
     return (
         <div className="spotlight">
-            <h2 className="spotlight-title">{articleTitle}</h2>
-            <figure className='spotlight-cover-figure'>
-                <img className="spotlight-cover" src={`assets/article/${articleId}/cover.png`} alt="Spotlight Illustration" />
-            </figure>
-            <p className="spotlight-teaser">{articleTeaser}</p>
+            <a href="#spotlight" className='spotlight-url'>
+                <h2 className="spotlight-title">{articleTitle}</h2>
+                <figure className='spotlight-cover-figure'>
+                    <img className="spotlight-cover" src={`assets/article/${articleId}/cover.png`} alt="Spotlight Illustration" />
+                </figure>
+                <p className="spotlight-teaser">{articleTeaser}</p>
+            </a>
         </div>
     );
   };
