@@ -26,7 +26,7 @@
     }
     .dashboard {
       display: flex;
-      height: 100vh;
+      height: 100%;
     }
     .sidebar {
       width: 250px;
@@ -204,6 +204,27 @@
             <textarea id="content" name="content" rows="8" placeholder="Entrez le contenu de l'article" required></textarea>
         </div>
         
+        <!-- Resume de l'article -->
+        <div class="form-group">
+            <label for="resume">Resumé de l'article :</label>
+            <textarea id="resume" name="resume" rows="4" placeholder="Entrez le resume de l'article" required></textarea>
+        </div>
+
+        <!-- Catégorie de l'article -->
+        <div class="form-group">
+            <label for="category">Categorie de l'article :</label>
+            <!-- <textarea id="category" name="category" rows="1" placeholder="Entrez la catégorie de l'article" required></textarea> -->
+            <select id="category" name="category">
+              <option value="Economie">Economie</option>
+              <option value="International">International</option>
+              <option value="Politique">Politique</option>
+              <option value="Sport">Sport</option>
+              <option value="Culture">Culture</option>
+              <option value="Faits divers">Faits divers</option>
+              <option value="Etudiant">Etudiant</option>
+            </select>
+        </div>
+
         <!-- Image d'illustration -->
         <div class="form-group">
             <label for="illustration">Image d'illustration :</label>
@@ -218,6 +239,12 @@
             <img id="coverPreview" class="image-preview" alt="Prévisualisation Couverture" style="display: none;">
         </div>
         
+        <!-- Date publication -->
+        <div class="form-group">
+            <label for="date">Date de publication :</label>
+            <input type="date" id="date" name="date" required/>
+        </div>
+
         <!-- Visibilité -->
         <div class="form-group">
             <label>Visibilité :</label>
@@ -311,7 +338,7 @@
       })
       .catch(error => {
         console.error('Erreur:', error);
-        alert('Une erreur est survenue.');
+        alert('Une erreur est survenue. ');
       });
     });
   </script>

@@ -18,6 +18,8 @@ if (!isset($_POST['title'], $_POST['content'], $_POST['visibility'], $_FILES['il
 
 $title      = trim($_POST['title']);
 $content    = trim($_POST['content']);
+$resume    = trim($_POST['resume']);
+$category    = $_POST['category'];
 $visibility = $_POST['visibility'];
 
 // Vérification des fichiers uploadés
@@ -67,17 +69,20 @@ try {
 }
 
 // Préparation et exécution de la requête d'insertion
-$stmt = $pdo->prepare("INSERT INTO articles (title, content, img_illustration, img_cover, visibility, author) VALUES (:title, :content, :illustration, :cover, :visibility, :author)");
+$stmt = $pdo->prepare("INSERT INTO articles (title, content, resume, category, img_illustration, img_cover, visibility, author, publication_date) VALUES (:title, :content, :resume, :category, :illustration, :cover, :visibility, :author, :publication_date)");
 $stmt->bindParam(':title', $title, PDO::PARAM_STR);
 $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+$stmt->bindParam(':resume', $resume, PDO::PARAM_STR);
+$stmt->bindParam(':category', $category, PDO::PARAM_STR);
 $stmt->bindParam(':illustration', $illustrationPath, PDO::PARAM_STR);
 $stmt->bindParam(':cover', $coverPath, PDO::PARAM_STR);
 $stmt->bindParam(':visibility', $visibility, PDO::PARAM_STR);
 $stmt->bindParam(':author', $_SESSION['username'], PDO::PARAM_STR);
+$stmt->bindParam(':publication_date', $_POST['date'], PDO::PARAM_STR);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => 'Article créé avec succès.']);
 } else {
-    echo json_encode(['error' => 'Erreur lors de la création de l\'article.']);
+    echo json_encode(['error' => 'Erreur lors de la création de l\'article.', 'details' => $stmt->errorInfo()]);
 }
 ?>
